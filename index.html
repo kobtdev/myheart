@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chúc mừng 20/11 cô Hằng</title>
+    
+    <!-- Favicon và Icons -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❤️</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❤️</text></svg>">
+    <link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❤️</text></svg>">
+    
+    <!-- Meta tags cho social sharing -->
+    <meta property="og:title" content="Heart Love - 3D Animation">
+    <meta property="og:description" content="Beautiful 3D heart animation with particles and effects">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❤️</text></svg>">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Chiếm toàn bộ chiều cao viewport */
+            overflow: hidden; /* Ẩn thanh cuộn */
+        }
+        canvas {
+            display: block; /* Loại bỏ khoảng trống dưới canvas */
+        }
+    </style>
+</head>
+<body>
+    <!-- Khởi tạo Music Manager -->
+    <script>
+        const musicManager = {
+            audio: null,
+            isPlaying: false,
+
+            init() {
+                // Đường dẫn nhạc cố định
+                this.audio = new Audio('./Nhac.mp3');
+                this.audio.loop = true;
+                this.audio.volume = 0.7;
+                this.audio.preload = "auto";
+
+                this.audio.onplay = () => {
+                    this.isPlaying = true;
+                    this.updateUI();
+                };
+
+                this.audio.onpause = () => {
+                    this.isPlaying = false;
+                    this.updateUI();
+                };
+
+                this.updateUI();
+            },
+
+            playMusic() {
+                if (!this.audio || this.isPlaying) return;  // Chỉ bật nếu chưa phát
+                this.audio.play().catch(e => {
+                    console.warn('Lỗi phát nhạc:', e);
+                });
+            },
+
+            updateUI() {
+                const icon = document.getElementById('audio-icon');
+                if (icon) {  // Kiểm tra nếu icon tồn tại
+                    if (this.isPlaying) {
+                        icon.classList.remove('fa-volume-xmark');
+                        icon.classList.add('fa-volume-high');
+                    } else {
+                        icon.classList.remove('fa-volume-high');
+                        icon.classList.add('fa-volume-xmark');
+                    }
+                }
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            musicManager.init();
+            // Thêm event listener cho click trên body (toàn màn hình) để bật nhạc
+            document.body.addEventListener('click', () => {
+                musicManager.playMusic();
+            });
+        });
+    </script>
+    
+    
+
+    <!-- Scripts -->
+    <script src="three.min.js"></script>
+    <script src="gsap.min.js"></script>
+    <script src="simplex-noise.js"></script>
+    <script src="OBJLoader.js"></script>
+    <script src="MeshSurfaceSampler.js"></script>
+    <script src="TrackballControls.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

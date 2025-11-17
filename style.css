@@ -1,0 +1,123 @@
+body {
+  background: #000;
+  overflow: hidden;
+  margin: 0;
+}
+
+#stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -999;
+  pointer-events: none;
+}
+
+/* Đảm bảo Three.js canvas không che phủ stars */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+/* Đảm bảo Three.js renderer có z-index thấp hơn */
+body > canvas:not(#stars) {
+  z-index: 0;
+}
+
+/* Music Control Button */
+.music-control {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.music-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.music-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: scale(1.1);
+}
+
+.music-btn:active {
+  transform: scale(0.95);
+}
+
+.music-icon {
+  width: 24px;
+  height: 24px;
+  transition: all 0.3s ease;
+}
+
+.music-icon.muted {
+  display: none;
+}
+
+.music-btn.muted .music-icon.playing {
+  display: none;
+}
+
+.music-btn.muted .music-icon.muted {
+  display: block;
+  opacity: 0.7;
+}
+
+.music-btn:not(.muted) .music-icon.playing {
+  display: block;
+}
+
+.music-btn:not(.muted) .music-icon.muted {
+  display: none;
+}
+
+/* Responsive design cho mobile */
+@media (max-width: 768px) {
+  body {
+    /* Tối ưu cho mobile */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  canvas {
+    /* Đảm bảo canvas hiển thị đúng trên mobile */
+    width: 100vw !important;
+    height: 100vh !important;
+  }
+  
+  .music-control {
+    top: 15px;
+    right: 15px;
+  }
+  
+  .music-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+  }
+}
+
+/* Tối ưu cho tablet */
+@media (min-width: 769px) and (max-width: 1024px) {
+  canvas {
+    /* Đảm bảo canvas hiển thị đúng trên tablet */
+    width: 100vw !important;
+    height: 100vh !important;
+  }
+}
