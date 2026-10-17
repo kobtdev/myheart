@@ -36,7 +36,7 @@ const textFromParams = getParamValue("text");
 const isBlockedUser = textFromParams === "Phạm Thanh Trúc";
 
 const textContent = (textFromParams && !isBlockedUser) ? textFromParams.split(" ") : [
-  "Hằng", "cô", "20/11", "mừng", "chúc",
+  "vẻ", "vui", "20/10", "bạn", "chúc",
 ];
 
 // Lấy nhạc từ params
